@@ -1,0 +1,9 @@
+/build/
+/dist/
+/iotdb_session.egg-info/
+
+__pycache__
+
+**/*.pyc
+
+/venv
