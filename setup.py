@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="iotdb-session-0.10.1",
-    version="0.1.0",
+    version="0.1.1",
     author="Julian Feinauer",
     author_email="j.feinauer@pragmaticminds.de",
     description="A small iotdb python client",
