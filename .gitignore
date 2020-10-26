@@ -1,7 +1,6 @@
 /build/
 /dist/
-/iotdb_session.egg-info/
-
+*.egg-info
 __pycache__
 
 **/*.pyc

@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="iotdb-session",
-    version="0.10.1",
+    name="iotdb-session-0.10.1",
+    version="0.1.0",
     author="Julian Feinauer",
     author_email="j.feinauer@pragmaticminds.de",
     description="A small iotdb python client",
@@ -15,7 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: Apache 2.0 License",
+        "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
     install_requires=[

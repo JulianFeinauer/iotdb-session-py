@@ -4,10 +4,12 @@ This module contains the missing parts from the `apache-iotdb` package which can
 
 ## Example
 
-Just install the package via `pip install iotdb-session`.
+Just install the package via `pip install iotdb-session-0.10.1`.
 The sessions API can be used via:
 
 ```
+from iotdb_session.Session import Session
+
 ip = "127.0.0.1"
 port_ = "6667"
 username_ = 'root'
