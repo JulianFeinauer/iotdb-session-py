@@ -38,3 +38,9 @@ class MyTestCase(unittest.TestCase):
             print(result)
             session.close()
 ```
+
+## Release Notes
+
+**0.1.4** - Improved Testcontainer: 
+* Use real containerip
+* Use Tag 0.10.1 not latest

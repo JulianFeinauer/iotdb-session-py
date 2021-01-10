@@ -15,11 +15,11 @@ class IoTDBContainer(DockerContainer):
 
     @wait_container_is_ready()
     def _connect(self):
-        session = Session('localhost', self.get_exposed_port(6667), 'root', 'root')
+        session = Session(self.get_container_host_ip(), self.get_exposed_port(6667), 'root', 'root')
         session.open(False)
         session.close()
 
-    def __init__(self, image="apache/iotdb:latest", **kwargs):
+    def __init__(self, image="apache/iotdb:0.10.1", **kwargs):
         super(IoTDBContainer, self).__init__(image)
         self.port_to_expose = 6667
         self.with_exposed_ports(self.port_to_expose)
