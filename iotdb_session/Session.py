@@ -200,7 +200,7 @@ class Session(object):
         status = self.__client.insertRecord(request)
         logging.debug("insert one record to device {} message: {}".format(device_id, status.message))
 
-    def insert_record(self, device_id, timestamp, measurements, data_types, values):
+    def insert_record(self, device_id, timestamp, measurements, data_types=None, values=None):
         """
         insert one row of record into database, if you want improve your performance, please use insertTablet method
             for example a record at time=10086 with three measurements is:
@@ -212,7 +212,10 @@ class Session(object):
         :param data_types: List of TSDataType, indicate the data type for each sensor
         :param values: List, values to be inserted, for each sensor
         """
-        data_types = [data_type.value for data_type in data_types]
+        if values is None:
+            raise Exception("Values must be provided!")
+        if data_types is not None:
+            data_types = [data_type.value for data_type in data_types]
         request = self.gen_insert_record_req(device_id, timestamp, measurements, data_types, values)
         status = self.__client.insertRecord(request)
         logging.debug("insert one record to device {} message: {}".format(device_id, status.message))
@@ -269,16 +272,16 @@ class Session(object):
         logging.debug("testing! insert multiple records, message: {}".format(status.message))
 
     def gen_insert_record_req(self, device_id, timestamp, measurements, data_types, values):
-        if (len(values) != len(data_types)) or (len(values) != len(measurements)):
+        if (data_types is not None and len(values) != len(data_types)) or (len(values) != len(measurements)):
             logging.info("length of data types does not equal to length of values!")
             # could raise an error here.
             return
-        values_in_bytes = Session.value_to_bytes(data_types, values)
-        return TSInsertRecordReq(self.__session_id, device_id, measurements, values_in_bytes, timestamp)
+        values_in_bytes = Session.value_to_bytes(data_types or [TSDataType.TEXT.value for _ in values], values)
+        return TSInsertRecordReq(self.__session_id, device_id, measurements, values_in_bytes, timestamp, inferType=(data_types is None))
 
     def gen_insert_records_req(self, device_ids, times, measurements_lst, types_lst, values_lst):
         if (len(device_ids) != len(measurements_lst)) or (len(times) != len(types_lst)) or \
-           (len(device_ids) != len(times)) or (len(times) != len(values_lst)):
+                (len(device_ids) != len(times)) or (len(times) != len(values_lst)):
             logging.info("deviceIds, times, measurementsList and valuesList's size should be equal")
             # could raise an error here.
             return

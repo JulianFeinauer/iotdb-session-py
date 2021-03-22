@@ -41,6 +41,10 @@ class MyTestCase(unittest.TestCase):
 
 ## Release Notes
 
+**0.1.5** - Fixed a bug that avoided Type Inference on the server
+* insert_record can now be called without dataTypes argument
+* then the server will perform type inference
+
 **0.1.4** - Improved Testcontainer: 
 * Use real containerip
 * Use Tag 0.10.1 not latest
